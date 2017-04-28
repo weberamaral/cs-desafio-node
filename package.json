@@ -13,9 +13,10 @@
   "scripts": {
     "start": "nodemon index.js",
     "start:development": "cross-env NODE_ENV=development DEBUG=cs-desafio-node:* npm start",
+    "precommit": "npm run lint && npm test",
     "commit": "git add -A . && git cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
-    "lint": "esw *.js server config --color",
+    "lint": "esw *.js src --color",
     "lint:watch": "npm run lint -- --watch",
     "test": "cross-env NODE_ENV=test ./node_modules/.bin/mocha --ui bdd --reporter spec --colors tests --recursive",
     "test:watch": "npm test -- --watch",
