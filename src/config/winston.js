@@ -12,7 +12,7 @@ module.exports = new (Winston.Logger)({
     }),
     new Winston.transports.File({
       level: 'info',
-      filename: '/logs/all-logs.log',
+      filename: './logs/all-logs.log',
       handleExceptions: true,
       json: true,
       maxsize: 5242880, // 5MB

@@ -1,11 +1,10 @@
 /**
  * Module dependencies.
  */
-const debug = require('debug')('cs-desafio-node:index');
 const App = require('./src/config/express');
+const debug = require('debug')('cs-desafio-node:index');
 
 const config = require('./src/config/config');
-const models = require('./src/config/sequelize');
 
 /**
  * Main application entry file.
@@ -19,9 +18,6 @@ debug('Starting cs-desafio-node server');
 if (!module.parent) { // eslint-disable-line no-lonely-if
   App.listen(config.port, () => {
     debug(`Server started on port ${config.port} and pid ${process.pid}`);
-  });
-  models.sequelize.sync({ force: config.sequelize.forceDbSync }).then(() => {
-    debug('Database connection Okay.');
   });
 }
 
