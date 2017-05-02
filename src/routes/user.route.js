@@ -9,6 +9,7 @@ const userController = require('../controllers/user/index');
 
 const router = Express.Router(); // eslint-disable-line new-cap
 
-router.post('/v1/users', ExpressValidation(validations.user.create), userController.create);
+router.post('/v1/user', ExpressValidation(validations.user.create), userController.create);
+router.get('/v1/user/:id', ExpressValidation(validations.user.get), userController.get);
 
 module.exports = router;

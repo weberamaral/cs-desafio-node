@@ -20,6 +20,9 @@ module.exports = {
     user: {
       create: {
         email: 'E-mail já existente'
+      },
+      get: {
+        notFound: 'Usuário não encontrado'
       }
     }
   }

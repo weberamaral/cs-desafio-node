@@ -2,7 +2,9 @@
  * Module dependencies.
  */
 const createUser = require('./create');
+const getUser = require('./get');
 
 module.exports = {
-  create: createUser
+  create: createUser,
+  get: getUser
 };

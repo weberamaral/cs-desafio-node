@@ -2,6 +2,7 @@
  * Module dependencies.
  */
 const Joi = require('joi');
+const HttpStatus = require('http-status');
 
 module.exports = {
   /**
@@ -89,6 +90,22 @@ module.exports = {
             }
           })
         })
+      }
+    },
+    get: {
+      params: {
+        id: Joi.string().required()
+      },
+      headers: {
+        Authentication: Joi.string().required()
+      },
+      options: {
+        status: HttpStatus.UNAUTHORIZED,
+        allowUnknownBody: false,
+        allowUnknownHeaders: true,
+        allowUnknownQuery: false,
+        allowUnknownParams: false,
+        allowUnknownCookies: false
       }
     }
   }
