@@ -10,12 +10,12 @@ const APIError = require('../helpers/api-error');
  */
 module.exports = () => (err, req, res, next) => {
   if (err instanceof ExpressValidation.ValidationError) {
-    const errors = [];
-    _.each(err.errors, (error) => {
-      error.mensagem = error.messages.join('. '); // eslint-disable-line no-param-reassign
-      errors.push(_.pick(error, ['field', 'message']));
-    });
-    return next(new APIError(err.message, err.status, errors));
+    // const errors = [];
+    // _.each(err.errors, (error) => {
+    //   error.mensagem = error.messages.join('. '); // eslint-disable-line no-param-reassign
+    //   errors.push(_.pick(error, ['field', 'message']));
+    // });
+    return next(new APIError(err.message, err.status, err.errors));
   } else if (!(err instanceof APIError)) {
     return next(new APIError(err.message, err.status));
   }

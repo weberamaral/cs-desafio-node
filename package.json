@@ -75,6 +75,7 @@
     "helmet": "3.5.0",
     "http-status": "1.0.1",
     "joi": "9.0.4",
+    "jsonwebtoken": "7.4.0",
     "lodash": "4.17.4",
     "method-override": "2.3.8",
     "morgan": "1.8.1",

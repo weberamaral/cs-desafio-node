@@ -1,6 +1,8 @@
 /**
  * Module dependencies.
  */
+const debug = require('debug')('cs-desafio-node:user.model');
+
 const securityPassword = require('../helpers/security-password');
 
 /**
@@ -39,14 +41,23 @@ module.exports = (sequelize, DataTypes) => {
     underscored: true,
     updatedAt: 'data_atualizacao',
     createdAt: 'data_criacao',
+    hooks: {
+      beforeCreate: function (user) { // eslint-disable-line object-shorthand
+        const saltHashPassword = securityPassword.saltHashPassword(user.senha);
+        user.salt = saltHashPassword.salt; // eslint-disable-line no-param-reassign
+        user.senha = saltHashPassword.hash; // eslint-disable-line no-param-reassign
+        user.ultimo_login = user.data_criacao; // eslint-disable-line no-param-reassign
+        return sequelize.Promise.resolve(user);
+      }
+    },
     instanceMethods: {
-      toJSON: () => {
-        const values = this.values();
+      toJSON: function () { // eslint-disable-line object-shorthand
+        const values = this.get();
         delete values.senha;
         delete values.salt;
-        return value;
+        return values;
       },
-      authenticate: (plainText) => {
+      authenticate: function (plainText) { // eslint-disable-line object-shorthand
         return securityPassword.saltHashPassword(plainText, this.salt) ===
             this.senha;
       }
@@ -60,7 +71,7 @@ module.exports = (sequelize, DataTypes) => {
           }
         });
       }
-    }
+    },
   });
   return User;
 };

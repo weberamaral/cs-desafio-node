@@ -16,5 +16,5 @@ module.exports = (req, res, next) => {
     .then((user) => {
       return res.status(HttpStatus.CREATED).json(user);
     })
-    .catch((err) => next(err));
+    .catch(err => next(err));
 };
