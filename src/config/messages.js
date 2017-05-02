@@ -16,6 +16,11 @@ module.exports = {
       databaseExclusionConstraintError: 'Violação de constaint ao deletar recurso.',
       databaseConnectionError: 'Erro de conexão.',
       databaseInstanceError: 'Erro na instancia do modelo.'
+    },
+    user: {
+      create: {
+        email: 'E-mail já existente'
+      }
     }
   }
 };

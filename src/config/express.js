@@ -82,7 +82,7 @@ class App {
     });
 
     // enable detailed API logging
-    // internals.configureLogging(this.app);
+    internals.configureLogging(this.app);
 
     // Configure routes
     internals.configureRoutes(this.app);

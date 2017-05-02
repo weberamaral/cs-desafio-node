@@ -1,8 +1,9 @@
 /**
  * Module dependencies.
  */
-const debug = require('debug')('cs-desafio-node:user.model');
+const jwt = require('jsonwebtoken');
 
+const config = require('../config/config');
 const securityPassword = require('../helpers/security-password');
 
 /**
@@ -42,11 +43,18 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: 'data_atualizacao',
     createdAt: 'data_criacao',
     hooks: {
-      beforeCreate: function (user) { // eslint-disable-line object-shorthand
+      beforeValidate: function (user) { // eslint-disable-line object-shorthand
         const saltHashPassword = securityPassword.saltHashPassword(user.senha);
         user.salt = saltHashPassword.salt; // eslint-disable-line no-param-reassign
         user.senha = saltHashPassword.hash; // eslint-disable-line no-param-reassign
-        user.ultimo_login = user.data_criacao; // eslint-disable-line no-param-reassign
+        return sequelize.Promise.resolve(user);
+      },
+      /* eslint-disable no-param-reassign */
+      beforeCreate: function (user) { // eslint-disable-line object-shorthand
+        user.ultimo_login = user.data_criacao;
+        user.token = jwt.sign({ email: user.email }, config.security.jwt, {
+          expiresIn: 1800
+        });
         return sequelize.Promise.resolve(user);
       }
     },
