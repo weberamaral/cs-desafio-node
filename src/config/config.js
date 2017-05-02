@@ -18,7 +18,8 @@ const envVarsSchema = Joi.object({
   DB_PASSWORD: Joi.string(),
   DB_NAME: Joi.string().default('msv_budgets_local'),
   SEQUELIZE_FORCE_SYNC: Joi.boolean().default(false),
-  SEQUELIZE_ENABLE_LOG: Joi.boolean().default(false)
+  SEQUELIZE_ENABLE_LOG: Joi.boolean().default(false),
+  JWT_SECRET: Joi.string()
 }).unknown().required();
 
 const { error, value: enVars } = Joi.validate(process.env, envVarsSchema);
@@ -46,5 +47,8 @@ module.exports = {
   },
   aws: {
     region: enVars.AWS_REGION
+  },
+  security: {
+    jwt: enVars.JWT_SECRET
   }
 };

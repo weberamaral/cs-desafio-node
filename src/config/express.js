@@ -17,6 +17,7 @@ const errorHandler = require('../middlewares/error-handler.middleware');
 const apiErrorHandler = require('../middlewares/api-error.middleware');
 const notFoundErrorHandler = require('../middlewares/not-found-error.middleware');
 const apiRoutes = require('../routes/api.route');
+const userRoutes = require('../routes/user.route');
 
 const internals = {};
 /**
@@ -24,6 +25,7 @@ const internals = {};
  */
 internals.configureRoutes = (app) => {
   app.use('/api', apiRoutes);
+  app.use('/api', userRoutes);
   app.get('/favicon.ico', (req, res) => res.send(204)); // Prevent 404 route for favicon.ico
 };
 /**
