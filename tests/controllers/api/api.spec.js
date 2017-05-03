@@ -14,13 +14,23 @@ Chai.config.includeStack = true;
 
 describe('# Api', () => {
   describe('## Module index', () => {
-    it('Should exist', (done) => {
+    it('Deveria existir', (done) => {
       expect(apiModule).to.not.equal(null);
+      done();
+    });
+    it('Deveria existir a propriedade version e ser uma função', (done) => {
+      expect(apiModule).to.have.property('version');
+      expect(apiModule.version).to.be.an('function');
+      done();
+    });
+    it('Deveria existir a propriedade healthCheck e ser uma função', (done) => {
+      expect(apiModule).to.have.property('healthCheck');
+      expect(apiModule.healthCheck).to.be.an('function');
       done();
     });
   });
   describe('## GET /api/v1/health-check', () => {
-    it('should return OK', (done) => {
+    it('Deveria retornar OK', (done) => {
       Request(App)
         .get('/api/v1/health-check')
         .expect(HttpStatus.OK)
@@ -32,7 +42,7 @@ describe('# Api', () => {
     });
   });
   describe('## GET /api/v1', () => {
-    it('Should return version and name application', (done) => {
+    it('Deveria retornar versão e nome da aplicação', (done) => {
       Request(App)
         .get('/api/v1')
         .expect(HttpStatus.OK)
