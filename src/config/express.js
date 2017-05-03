@@ -35,14 +35,16 @@ internals.configureRoutes = (app) => {
  * @param app
  */
 internals.configureLogging = (app) => {
-  ExpressWinston.requestWhitelist.push('body');
-  ExpressWinston.responseWhitelist.push('body');
-  app.use(ExpressWinston.logger({
-    winstonInstance,
-    meta: true,
-    msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
-    colorStatus: true
-  }));
+  if (config.env !== 'test') {
+    ExpressWinston.requestWhitelist.push('body');
+    ExpressWinston.responseWhitelist.push('body');
+    app.use(ExpressWinston.logger({
+      winstonInstance,
+      meta: true,
+      msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms',
+      colorStatus: true
+    }));
+  }
 };
 
 /**

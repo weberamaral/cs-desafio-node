@@ -13,6 +13,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "start:development": "cross-env NODE_ENV=development DEBUG=cs-desafio-node:* npm start",
+    "precommit": "npm run lint && npm test",
     "commit": "git add -A . && git cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "lint": "esw *.js src --color",

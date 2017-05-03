@@ -14,8 +14,8 @@ const models = require('../../config/sequelize');
  */
 module.exports = (req, res, next) => {
   let userInstance;
-  return models.sequelize.transaction((transaction) => {
-    return models.User.create(req.body, { transaction })
+  return models.sequelize.transaction(transaction =>
+    models.User.create(req.body, { transaction })
       .then((user) => {
         userInstance = user;
         req.body.telefones.forEach((phone) => {
@@ -23,14 +23,12 @@ module.exports = (req, res, next) => {
         });
         return models.Phone.bulkCreate(req.body.telefones, { transaction, individualHooks: true });
       })
-      .then(() => {
-        return res.status(HttpStatus.CREATED).json(userInstance);
-      })
+      .then(() => res.status(HttpStatus.CREATED).json(userInstance))
       .catch((err) => {
         if (err.name === 'SequelizeUniqueConstraintError') {
           return next(new APIError(messages.errors.user.create.email, HttpStatus.CONFLICT));
         }
         return next(err);
-      });
-  });
+      })
+  );
 };

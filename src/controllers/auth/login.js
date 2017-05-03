@@ -37,9 +37,7 @@ module.exports = (req, res, next) => {
         ultimo_login: new Date().toISOString(),
         token
       })
-        .then((result) => {
-          return res.json(result);
-        })
+        .then(result => res.json(result))
         .catch(err => next(err));
     })
     .catch(err => next(err));

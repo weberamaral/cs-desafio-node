@@ -9,19 +9,20 @@ module.exports = {
   auth: {
     login: {
       body: {
-        email: Joi.string().regex(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/).required().options({
-          language: {
-            any: {
-              empty: '!!Não deve ser vazio',
-              required: '!!Deve ser informado'
-            },
-            string: {
-              regex: {
-                base: '!!Inválido'
+        email: Joi.string().regex(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/).required()
+          .options({
+            language: {
+              any: {
+                empty: '!!Não deve ser vazio',
+                required: '!!Deve ser informado'
+              },
+              string: {
+                regex: {
+                  base: '!!Inválido'
+                }
               }
             }
-          }
-        }),
+          }),
         senha: Joi.string().required().options({
           language: {
             any: {
@@ -37,79 +38,84 @@ module.exports = {
   user: {
     create: {
       body: {
-        nome: Joi.string().min(1).max(64).required().options({
-          language: {
-            any: {
-              empty: '!!Não deve ser vazio',
-              required: '!!Deve ser informado'
-            },
-            string: {
-              min: '!!Deve possuir ao menos 1 caracter',
-              max: '!!Deve possuir no máximo 64 caracteres'
-            }
-          }
-        }),
-        email: Joi.string().regex(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/).required().options({
-          language: {
-            any: {
-              empty: '!!Não deve ser vazio',
-              required: '!!Deve ser informado'
-            },
-            string: {
-              regex: {
-                base: '!!Inválido'
-              }
-            }
-          }
-        }),
-        senha: Joi.string().required().options({
-          language: {
-            any: {
-              required: '!!Deve ser informada',
-              empty: '!!Não deve ser vazio'
-            }
-          }
-        }),
-        telefones: Joi.array().min(1).required().options({
-          language: {
-            any: {
-              required: '!!Deve ser informado'
-            },
-            array: {
-              base: '!!Deve ser um array',
-              min: '!!Deve possuir ao menos 1 telefone'
-            }
-          }
-        }).items({
-          ddd: Joi.string().regex(/^[0-9]{2}$/).required().options({
+        nome: Joi.string().min(1).max(64).required()
+          .options({
             language: {
               any: {
-                required: '!!Deve ser informado',
-                empty: '!!Não deve ser vazio'
+                empty: '!!Não deve ser vazio',
+                required: '!!Deve ser informado'
               },
               string: {
-                base: '!!Deve ser um número',
+                min: '!!Deve possuir ao menos 1 caracter',
+                max: '!!Deve possuir no máximo 64 caracteres'
+              }
+            }
+          }),
+        email: Joi.string().regex(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/).required()
+          .options({
+            language: {
+              any: {
+                empty: '!!Não deve ser vazio',
+                required: '!!Deve ser informado'
+              },
+              string: {
                 regex: {
                   base: '!!Inválido'
                 }
               }
             }
           }),
-          numero: Joi.string().regex(/^[0-9]{8,9}$/).required().options({
+        senha: Joi.string().required()
+          .options({
             language: {
               any: {
-                required: '!!Deve ser informado',
+                required: '!!Deve ser informada',
                 empty: '!!Não deve ser vazio'
+              }
+            }
+          }),
+        telefones: Joi.array().min(1).required()
+          .options({
+            language: {
+              any: {
+                required: '!!Deve ser informado'
               },
-              string: {
-                base: '!!Deve ser uma string',
-                regex: {
-                  base: '!!Informe um número de telefone válido. (celular ou fixo)'
-                }
+              array: {
+                base: '!!Deve ser um array',
+                min: '!!Deve possuir ao menos 1 telefone'
               }
             }
           })
-        })
+          .items({
+            ddd: Joi.string().regex(/^[0-9]{2}$/).required().options({
+              language: {
+                any: {
+                  required: '!!Deve ser informado',
+                  empty: '!!Não deve ser vazio'
+                },
+                string: {
+                  base: '!!Deve ser um número',
+                  regex: {
+                    base: '!!Inválido'
+                  }
+                }
+              }
+            }),
+            numero: Joi.string().regex(/^[0-9]{8,9}$/).required().options({
+              language: {
+                any: {
+                  required: '!!Deve ser informado',
+                  empty: '!!Não deve ser vazio'
+                },
+                string: {
+                  base: '!!Deve ser uma string',
+                  regex: {
+                    base: '!!Informe um número de telefone válido. (celular ou fixo)'
+                  }
+                }
+              }
+            })
+          })
       },
       options: {
         status: HttpStatus.UNPROCESSABLE_ENTITY,

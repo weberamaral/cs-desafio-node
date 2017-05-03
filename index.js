@@ -21,7 +21,7 @@ if (!module.parent) { // eslint-disable-line no-lonely-if
     debug(`Server started on port ${config.port} and pid ${process.pid}`);
   });
   models.sequelize.sync({ force: config.sequelize.forceDbSync }).then(() => {
-    debug('Database connection Okay.')
+    debug('Database connection Okay.');
   });
 }
 

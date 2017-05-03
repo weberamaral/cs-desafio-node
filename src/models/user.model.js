@@ -45,6 +45,7 @@ module.exports = (sequelize, DataTypes) => {
     createdAt: 'data_criacao',
     hooks: {
       /* eslint-disable no-param-reassign */
+      /* eslint-disable func-names */
       beforeValidate: function (user) { // eslint-disable-line object-shorthand
         const saltHashPassword = securityPassword.saltHashPassword(user.senha);
         user.salt = saltHashPassword.salt;
@@ -52,6 +53,7 @@ module.exports = (sequelize, DataTypes) => {
         return sequelize.Promise.resolve(user);
       },
       /* eslint-disable no-param-reassign */
+      /* eslint-disable func-names */
       beforeCreate: function (user) { // eslint-disable-line object-shorthand
         user.ultimo_login = user.data_criacao;
         user.token = JWT.sign({

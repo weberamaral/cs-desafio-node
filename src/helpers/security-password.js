@@ -8,11 +8,10 @@ const internals = {};
  *
  * @param length
  */
-internals.generateSalt = (length) => {
-  return crypto.randomBytes(Math.ceil(length/2))
+internals.generateSalt = length =>
+  crypto.randomBytes(Math.ceil(length / 2))
     .toString('hex')
     .slice(0, length);
-};
 /**
  *
  * @param password
@@ -22,7 +21,7 @@ internals.generateHash = (password, salt) => {
   const hash = crypto.createHmac('sha512', salt);
   hash.update(password);
   return {
-    salt: salt,
+    salt,
     hash: hash.digest('hex')
   };
 };
@@ -34,7 +33,7 @@ module.exports = {
    * @return {{salt, hash}}
    */
   saltHashPassword: (userPassword, salt) => {
-    salt = salt || internals.generateSalt(16);
+    salt = salt || internals.generateSalt(16); // eslint-disable-line no-param-reassign
     return internals.generateHash(userPassword, salt);
   }
 };

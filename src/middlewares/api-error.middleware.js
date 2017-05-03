@@ -3,7 +3,7 @@
  */
 const ExpressValidation = require('express-validation');
 const HttpStatus = require('http-status');
-const _ = require('lodash');
+// const _ = require('lodash');
 
 const APIError = require('../helpers/api-error');
 const messages = require('../config/messages');
