@@ -131,7 +131,7 @@ module.exports = {
         id: Joi.string().required()
       },
       headers: {
-        'x-access-token': Joi.string().regex(/Bearer\s(\S+)/).required()
+        authorization: Joi.string().regex(/Bearer\s(\S+)/).required()
       },
       options: {
         status: HttpStatus.UNAUTHORIZED,

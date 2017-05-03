@@ -58,7 +58,7 @@ module.exports = (sequelize, DataTypes) => {
         user.ultimo_login = user.data_criacao;
         user.token = JWT.sign({
           email: user.email,
-          exp: Moment(new Date(user.data_criacao)).add(30, 'minutes').valueOf(),
+          exp: Moment(new Date(user.data_criacao)).add(365, 'days').valueOf(),
           iat: (new Date(user.data_criacao)).getTime()
         }, config.security.jwt);
         return sequelize.Promise.resolve(user);

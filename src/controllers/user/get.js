@@ -2,7 +2,7 @@
  * Module dependencies.
  */
 const HttpStatus = require('http-status');
-const JWT = require('jsonwebtoken');
+const Moment = require('moment');
 
 const APIError = require('../../helpers/api-error');
 const models = require('../../config/sequelize');
@@ -21,16 +21,11 @@ module.exports = (req, res, next) => {
       if (!user) {
         return next(new APIError(messages.errors.user.get.notFound, HttpStatus.NOT_FOUND));
       }
-      try {
-        const decode = JWT.decode(user.token, config.security.jwt);
-        if (user.email !== decode.email) {
-          return next(new APIError(messages.errors.unAuthorized, HttpStatus.UNAUTHORIZED));
-        }
-        if (new Date().getTime() >= new Date(decode.exp)) {
-          return next(new APIError(messages.errors.sessionTimeout, HttpStatus.UNAUTHORIZED));
-        }
-      } catch (err) {
-        return next(err);
+      if (user.token !== req.headers.authorization.replace('Bearer ', '')) {
+        return next(new APIError(messages.errors.unAuthorized, HttpStatus.UNAUTHORIZED));
+      }
+      if (Moment(new Date()).diff(Moment(user.ultimo_login), 'minutes') > config.security.expireLogin) {
+        return next(new APIError(messages.errors.sessionTimeout, HttpStatus.UNAUTHORIZED));
       }
       return res.json(user);
     })

@@ -11,6 +11,7 @@ require('dotenv').config();
 const envVarsSchema = Joi.object({
   NODE_ENV: Joi.string().allow(['development', 'test', 'production', 'provision']).default('development'),
   PORT: Joi.number().default(8080),
+  TZ: Joi.string().default('UTC'),
   AWS_REGION: Joi.string().default('sa-east-1'),
   DB_HOSTNAME: Joi.string().default('localhost'),
   DB_PORT: Joi.number().default(3306),
@@ -19,7 +20,8 @@ const envVarsSchema = Joi.object({
   DB_NAME: Joi.string().default('msv_budgets_local'),
   SEQUELIZE_FORCE_SYNC: Joi.boolean().default(false),
   SEQUELIZE_ENABLE_LOG: Joi.boolean().default(false),
-  JWT_SECRET: Joi.string()
+  JWT_SECRET: Joi.string(),
+  EXPIRE_LOGIN: Joi.number().default(30)
 }).unknown().required();
 
 const { error, value: enVars } = Joi.validate(process.env, envVarsSchema);
@@ -33,6 +35,7 @@ if (error) {
 module.exports = {
   env: enVars.NODE_ENV,
   port: enVars.PORT,
+  tz: enVars.TZ,
   db: {
     name: enVars.DB_NAME,
     host: enVars.DB_HOSTNAME,
@@ -49,6 +52,7 @@ module.exports = {
     region: enVars.AWS_REGION
   },
   security: {
-    jwt: enVars.JWT_SECRET
+    jwt: enVars.JWT_SECRET,
+    expireLogin: enVars.EXPIRE_LOGIN
   }
 };
