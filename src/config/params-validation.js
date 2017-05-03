@@ -31,6 +31,14 @@ module.exports = {
             }
           }
         })
+      },
+      options: {
+        status: HttpStatus.UNPROCESSABLE_ENTITY,
+        allowUnknownBody: false,
+        allowUnknownHeaders: false,
+        allowUnknownQuery: false,
+        allowUnknownParams: false,
+        allowUnknownCookies: false
       }
     }
   },
