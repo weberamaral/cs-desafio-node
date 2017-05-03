@@ -5,7 +5,38 @@ API REST in Node.js usando ES6 and Express com Code Coverage e autenticação JW
 
 ## Features
 
+* **ECMAScript 6** - Escrita do código fonte.
+* **Geração de token de usuário com JsonWebToken** - usando [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+* **Code Linting** - Javascript code linting usando [ESLint](http://eslint.org/) para identificar e reportar padrões de 
+escrita em Javascript. Utilizando as regras bases de [eslint-contrib-airbnb](https://github.com/airbnb/javascript/tree/master/packages/eslint-config-airbnb)
+* **Reinicialização automática do servidor** - Reinicialização do servidor com [nodemon](https://github.com/remy/nodemon)
+* **Debugging via [debug](https://www.npmjs.com/package/debug)** - Apresenta informações de debug quando configurada a 
+variável DEBUG na aplicação.
+* **Validações de parametros de entrada via [express-validation](https://www.npmjs.com/package/express-validation)** - Valida
+body, params, quary, headers e cookies da requisição via middleware.
+* **Pre-commit hooks** - Roda as tarefas de lint e tests em cada comit na aplicação.
+* **Securança do App via [helmet](https://github.com/helmetjs/helmet)** - Helmet ajuda na segurança de aplicações Express, configurando
+diversos HTTP headers e mais...
+* **Suporte CORS via [cors](https://github.com/expressjs/cors)** 
+* **Utilização de [http-status](https://www.npmjs.com/package/http-status)** - Para configurar os status code da aplicação.
+* **.editorconfig** - Para padronização de configurações entre IDEs
+* **AWS Beanstalk** - Host para aplicação
+* **MySQL com ORM Sequelize**
+
 ## Local Requirements
+
+### AWS
+* Conta de desenvolvimento em [aws.amazon.com](aws.amazon.com)
+* AWS Elastic BeanStalk [elasticbeanstalk](https://aws.amazon.com/pt/elasticbeanstalk/)
+* AWS CLI - Instruções de instalação [AWS CLI install](http://docs.aws.amazon.com/cli/latest/userguide/installing.html)
+* AWS EB CLI - Instruções de instalação [AWS EB CLI install](http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/eb-cli3-install.html)
+
+### NodeJS
+* NodeJS >=6.9 [nodejs](https://nodejs.org/en/)
+* NPM >=3
+
+### MySQL
+* MySQL server
 
 ## Getting Started
 Clone o repositório:
@@ -57,18 +88,32 @@ npm run lint
 npm run lint:watch
 ```
 
-Deploy:
+Init, Create e Deploy:
+
+A inicialização da aplicação para host no AWS Elastic BeanStalk:
+
 ```
-# TODO
+eb init cs-desafio-node --region=sa-east-1
 ```
+
+A criação do ambiente no AWS Elastic BeanStalk:
+
+```
+eb create development 
+```
+
+Para deploy da aplicação é utilizado a CLI do elastic beanstalk que assume como versionamento o repositório git, 
+configurado.
+
+```
+eb deploy
+```
+
+Este comando faz com que o projeto seja enviado para o Bucket S3 - com versão de acordo com a tag da aplicação.
+Os arquivos ignorados para envio ao servidor são informados em `.ebignore`.
+
+As variáveis de ambientes básicas - que podem ser versionadas - são informadas dentro da pasta `.ebextensions`
 
 ## Logging
 A biblioteca [winston](https://www.npmjs.com/package/winston) é utilizada para log da aplicação. Utilizando 
 multiplos transportes por nível de log.
-
-## Docker
-```
-# Para ambiente de desenvolvimento
-# Todos os serviços serão reiniciados ao modificar algum arquivo
-1. bash bin/development.sh
-```
