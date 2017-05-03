@@ -9,6 +9,6 @@ const authController = require('../controllers/auth/index');
 
 const router = Express.Router(); // eslint-disable-line new-cap
 
-router.post('/v1/sign_in', ExpressValidation(validations.auth.login), authController.login);
+router.post('/v1/auth/sign_in', ExpressValidation(validations.auth.login), authController.login);
 
 module.exports = router;
