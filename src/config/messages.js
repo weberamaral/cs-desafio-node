@@ -4,9 +4,10 @@
  */
 module.exports = {
   errors: {
-    unAuthorized: 'Acesso não autorizado.',
+    unAuthorized: 'Não autorizado.',
     apiNotFound: 'Recurso não encontrado.',
     badRequest: 'Erro de validação',
+    sessionTimeout: 'Sessão inválida',
     sequelize: {
       databaseValidationError: 'Erro de validação.',
       databaseError: 'Erro interno.',
@@ -16,6 +17,11 @@ module.exports = {
       databaseExclusionConstraintError: 'Violação de constaint ao deletar recurso.',
       databaseConnectionError: 'Erro de conexão.',
       databaseInstanceError: 'Erro na instancia do modelo.'
+    },
+    auth: {
+      login: {
+        notFound: 'Usuário e/ou senha inválidos'
+      }
     },
     user: {
       create: {

@@ -19,7 +19,7 @@ module.exports = (req, res, next) => {
       .then((user) => {
         userInstance = user;
         req.body.telefones.forEach((phone) => {
-          phone.user_id = user.id; // eslint-disable-line no-param-reassign
+          phone.usuario_id = user.id; // eslint-disable-line no-param-reassign
         });
         return models.Phone.bulkCreate(req.body.telefones, { transaction, individualHooks: true });
       })

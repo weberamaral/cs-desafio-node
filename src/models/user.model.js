@@ -1,7 +1,8 @@
 /**
  * Module dependencies.
  */
-const jwt = require('jsonwebtoken');
+const JWT = require('jsonwebtoken');
+const Moment = require('moment');
 
 const config = require('../config/config');
 const securityPassword = require('../helpers/security-password');
@@ -43,18 +44,21 @@ module.exports = (sequelize, DataTypes) => {
     updatedAt: 'data_atualizacao',
     createdAt: 'data_criacao',
     hooks: {
+      /* eslint-disable no-param-reassign */
       beforeValidate: function (user) { // eslint-disable-line object-shorthand
         const saltHashPassword = securityPassword.saltHashPassword(user.senha);
-        user.salt = saltHashPassword.salt; // eslint-disable-line no-param-reassign
-        user.senha = saltHashPassword.hash; // eslint-disable-line no-param-reassign
+        user.salt = saltHashPassword.salt;
+        user.senha = saltHashPassword.hash;
         return sequelize.Promise.resolve(user);
       },
       /* eslint-disable no-param-reassign */
       beforeCreate: function (user) { // eslint-disable-line object-shorthand
         user.ultimo_login = user.data_criacao;
-        user.token = jwt.sign({ email: user.email }, config.security.jwt, {
-          expiresIn: 1800
-        });
+        user.token = JWT.sign({
+          email: user.email,
+          exp: Moment(new Date(user.data_criacao)).add(30, 'minutes').valueOf(),
+          iat: (new Date(user.data_criacao)).getTime()
+        }, config.security.jwt);
         return sequelize.Promise.resolve(user);
       }
     },
@@ -66,20 +70,10 @@ module.exports = (sequelize, DataTypes) => {
         return values;
       },
       authenticate: function (plainText) { // eslint-disable-line object-shorthand
-        return securityPassword.saltHashPassword(plainText, this.salt) ===
+        return securityPassword.saltHashPassword(plainText, this.salt).hash ===
             this.senha;
       }
-    },
-    classMethods: {
-      associate: (models) => {
-        User.hasMany(models.Phone, {
-          as: 'phones',
-          foreignKey: {
-            allowNull: false
-          }
-        });
-      }
-    },
+    }
   });
   return User;
 };

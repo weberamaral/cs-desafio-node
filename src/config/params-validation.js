@@ -5,16 +5,35 @@ const Joi = require('joi');
 const HttpStatus = require('http-status');
 
 module.exports = {
-  /**
-   * Default validations
-   */
-  defaults: {
-    id: {
-      params: {
-        id: Joi.string().required()
+  // params-validation for auth routes
+  auth: {
+    login: {
+      body: {
+        email: Joi.string().regex(/^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/).required().options({
+          language: {
+            any: {
+              empty: '!!Não deve ser vazio',
+              required: '!!Deve ser informado'
+            },
+            string: {
+              regex: {
+                base: '!!Inválido'
+              }
+            }
+          }
+        }),
+        senha: Joi.string().required().options({
+          language: {
+            any: {
+              required: '!!Deve ser informada',
+              empty: '!!Não deve ser vazio'
+            }
+          }
+        })
       }
     }
   },
+  // params-validation for user routes
   user: {
     create: {
       body: {
@@ -62,34 +81,43 @@ module.exports = {
             }
           }
         }).items({
-          ddd: Joi.number().min(1).max(99).required().options({
+          ddd: Joi.string().regex(/^[0-9]{2}$/).required().options({
             language: {
               any: {
                 required: '!!Deve ser informado',
                 empty: '!!Não deve ser vazio'
               },
-              number: {
+              string: {
                 base: '!!Deve ser um número',
-                min: '!!Deve possuir ao menos 2 caracteres',
-                max: '!!Deve possuir no máximo 2 caracteres'
+                regex: {
+                  base: '!!Inválido'
+                }
               }
             }
           }),
-          numero: Joi.number().min(10000000).max(999999999).positive().required().options({
+          numero: Joi.string().regex(/^[0-9]{8,9}$/).required().options({
             language: {
               any: {
                 required: '!!Deve ser informado',
                 empty: '!!Não deve ser vazio'
               },
-              number: {
-                base: '!!Deve ser um número',
-                min: '!!Deve possuir ao menos 9 caracteres',
-                max: '!!Deve possuir no máximo 9 caracteres',
-                positive: '!!Deve ser um número positivo'
+              string: {
+                base: '!!Deve ser uma string',
+                regex: {
+                  base: '!!Informe um número de telefone válido. (celular ou fixo)'
+                }
               }
             }
           })
         })
+      },
+      options: {
+        status: HttpStatus.UNPROCESSABLE_ENTITY,
+        allowUnknownBody: false,
+        allowUnknownHeaders: false,
+        allowUnknownQuery: false,
+        allowUnknownParams: false,
+        allowUnknownCookies: false
       }
     },
     get: {
@@ -97,7 +125,7 @@ module.exports = {
         id: Joi.string().required()
       },
       headers: {
-        Authentication: Joi.string().required()
+        'x-access-token': Joi.string().regex(/Bearer\s(\S+)/).required()
       },
       options: {
         status: HttpStatus.UNAUTHORIZED,

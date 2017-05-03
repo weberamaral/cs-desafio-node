@@ -6,11 +6,11 @@
 module.exports = (sequelize, DataTypes) => {
   const Phone = sequelize.define('Phone', {
     ddd: {
-      type: DataTypes.INTEGER(3),
+      type: DataTypes.STRING(3),
       allowNull: false
     },
     numero: {
-      type: DataTypes.INTEGER(9),
+      type: DataTypes.STRING(9),
       allowNull: false
     }
   }, {
@@ -18,7 +18,17 @@ module.exports = (sequelize, DataTypes) => {
     timestamps: true,
     underscored: true,
     updatedAt: 'data_atualizacao',
-    createdAt: 'data_criacao'
+    createdAt: 'data_criacao',
+    classMethods: {
+      associate: (models) => {
+        Phone.belongsTo(models.User, {
+          as: 'usuario',
+          foreignKey: {
+            allowNull: false
+          }
+        });
+      }
+    }
   });
   return Phone;
 };
