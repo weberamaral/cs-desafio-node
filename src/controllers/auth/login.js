@@ -9,7 +9,6 @@ const messages = require('../../config/messages');
 
 /**
  * @api {post} /auth/sign_in Login
- * @apiVersion 0.1.0
  * @apiName Login
  * @apiGroup Authentication
  * @apiPermission by token
