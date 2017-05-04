@@ -1,3 +1,8 @@
+<a name="0.3.0"></a>
+# [0.3.0](https://github.com/weberamaral/cs-desafio-node/compare/v0.2.0...v0.3.0) (2017-05-04)
+
+
+
 <a name="0.2.0"></a>
 # [0.2.0](https://github.com/weberamaral/cs-desafio-node/compare/1700c0a...v0.2.0) (2017-05-04)
 
