@@ -3,6 +3,28 @@
 ## Overview
 API REST in Node.js usando ES6 and Express com Code Coverage e autenticação JWT
 
+## Endpoints
+
+Aplicação disponibilizada em:
+http://dev-cs-desafio-node.sa-east-1.elasticbeanstalk.com/
+
+Routes:
+
+### GET  /api/v1 - Version
+Retorna a versão e nome da aplicação
+
+### GET /api/v1/health-check - Health Check
+Simples health check da aplicação
+
+### POST /api/v1/user - Cadastro de usuários
+Cadastra novos usuários na aplicação
+
+### GET /api/v1/user/:id - Busca de usuário
+Recupera um determinado usuário pelo ID
+
+### POST /api/v1/auth/sign_in - Autenticação
+Autentica um usuário na aplicação
+
 ## Features
 
 * **ECMAScript 6** - Escrita do código fonte.

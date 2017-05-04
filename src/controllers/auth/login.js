@@ -16,22 +16,12 @@ const messages = require('../../config/messages');
  *
  * @apiDescription Autenticação do usuário na API
  *
- * @apiExample Exemplo de uso
- * curl -i http://localhost:8080/api/v1/auth/sign_in
- *
- * @apiHeader {String} Authentication
- *
- * @apiHeaderExample {json} Header-Example:
- * {
- *   "Authentication": "Bearer eyJhbGciOiJIUzI1N..."
- * }
- *
- * @apiSuccess {String} id
- * @apiSuccess {String} nome
- * @apiSuccess {String} ultimo_login
- * @apiSuccess {String} data_atualizacao
- * @apiSuccess {String} data_criacao
- * @apiSuccess {String} token
+ * @apiSuccess {String} id Id do usuário na aplicação
+ * @apiSuccess {String} nome Nome do usuário cadastrado
+ * @apiSuccess {String} ultimo_login Último login do usuário na aplicação
+ * @apiSuccess {String} data_atualizacao Data da última atualização do usuário
+ * @apiSuccess {String} data_criacao data de criação do usuário
+ * @apiSuccess {String} token Token de acesso do usuário na aplicação
  *
  * @apiSuccessExample Success-Response:
  * HTTP/1.1 200 OK
@@ -45,12 +35,26 @@ const messages = require('../../config/messages');
  *   "token": "eyJhbGciOiJIUzI1N...."
  * }
  *
- * @apiError UserUnAuthorized Usuário não autorizado
- * @apiErrorExample {json} Error-Response:
+ * @apiError UnAuthorizedError Usuário não autorizado
+ * @apiErrorExample {json} Não autorizado
  * HTTP/1.1 401 UnAuthorized
  * {
  *   "mensagem": "E-mail e/ou senha inexistente",
  *   "code": 401
+ * }
+ *
+ * @apiError UnprocessableEntityError Erro ao processar dados da entidade
+ * @apiErrorexample {json} Entidade não processada
+ * HTTP/1.1 422 Unprocessable entity
+ * {
+ *   "mensagem": "Erro de validação de dados"
+ *   "code": 422,
+ *   "errors": [
+ *     {
+ *       "field": "field_name",
+ *       "mensagem": "Descrição do erro"
+ *     }
+ *   ]
  * }
  *
  */
