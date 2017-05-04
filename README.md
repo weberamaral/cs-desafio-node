@@ -99,9 +99,6 @@ npm run test:coverage
 
 # Rodando os testes em modo escuta
 npm run test:watch
-
-# Rodando os testes com istanbul (configurado com .istanbul.yml)
-npm run test:check-coverage
 ```
 
 Lint:
@@ -131,7 +128,7 @@ Para deploy da aplicação é utilizado a CLI do elastic beanstalk que assume co
 configurado.
 
 ```
-eb deploy
+npm run deploy
 ```
 
 Este comando faz com que o projeto seja enviado para o Bucket S3 - com versão de acordo com a tag da aplicação.
