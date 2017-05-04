@@ -6,9 +6,6 @@
  *
  * @apiDescription Simples health-check da aplicação
  *
- * @apiExample Exemplo de uso
- * curl -i http://localhost:8080/api/v1/health-check
- *
  * @apiSuccess {String} OK Success message
  *
  * @apiSuccessExample {html} Success-Response

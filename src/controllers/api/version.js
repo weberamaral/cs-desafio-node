@@ -11,9 +11,6 @@ const { name, version } = require('../../../package.json');
  *
  * @apiDescription Apresentação da versão e nome da aplicação
  *
- * @apiExample Exemplo de uso
- * curl -i http://localhost:8080/api/v1/
- *
  * @apiSuccess {String} name Nome da aplicação
  * @apiSuccess {String} version Versão da aplicação
  *
