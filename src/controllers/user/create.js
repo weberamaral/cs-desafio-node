@@ -9,6 +9,7 @@ const models = require('../../config/sequelize');
 /**
  * @api {post} /user CreateUser
  * @apiName CreateUser
+ * @apiVersion 1.0.0
  * @apiGroup User
  * @apiPermission none
  *

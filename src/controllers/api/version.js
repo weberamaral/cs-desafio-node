@@ -6,6 +6,7 @@ const { name, version } = require('../../../package.json');
 /**
  * @api {get} / Index
  * @apiName Index
+ * @apiVersion 1.0.0
  * @apiGroup Application
  * @apiPermission public
  *

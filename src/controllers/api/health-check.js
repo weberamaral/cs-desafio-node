@@ -1,6 +1,7 @@
 /**
  * @api {get} /health-check Health-Check
  * @apiName HealthCheck
+ * @apiVersion 1.0.0
  * @apiGroup Application
  * @apiPermission public
  *

@@ -12,6 +12,7 @@ const config = require('../../config/config');
 /**
  * @api {get} /user/:id GetUser
  * @apiName GetUser
+ * @apiVersion 1.0.0
  * @apiGroup User
  * @apiPermission by token
  *
