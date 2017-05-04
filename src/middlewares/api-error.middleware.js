@@ -3,7 +3,7 @@
  */
 const ExpressValidation = require('express-validation');
 const HttpStatus = require('http-status');
-// const _ = require('lodash');
+const _ = require('lodash');
 
 const APIError = require('../helpers/api-error');
 const messages = require('../config/messages');
@@ -16,12 +16,12 @@ module.exports = () => (err, req, res, next) => {
     if (err.status === HttpStatus.UNAUTHORIZED) {
       return next(new APIError(messages.errors.unAuthorized, HttpStatus.UNAUTHORIZED));
     }
-    // const errors = [];
-    // _.each(err.errors, (error) => {
-    //   error.mensagem = error.messages.join('. '); // eslint-disable-line no-param-reassign
-    //   errors.push(_.pick(error, ['field', 'message']));
-    // });
-    return next(new APIError(err.message, err.status, err.errors));
+    const errors = [];
+    _.each(err.errors, (error) => {
+      error.mensagem = error.messages.join('. '); // eslint-disable-line no-param-reassign
+      errors.push(_.pick(error, ['field', 'mensagem']));
+    });
+    return next(new APIError('Erro de validação de dados', err.status, errors));
   } else if (!(err instanceof APIError)) {
     return next(new APIError(err.message, err.status));
   }

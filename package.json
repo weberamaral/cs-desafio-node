@@ -13,6 +13,7 @@
   "scripts": {
     "start": "nodemon index.js",
     "start:development": "cross-env NODE_ENV=development DEBUG=cs-desafio-node:* npm start",
+    "precommit": "npm run lint && npm test",
     "commit": "git add -A . && git cz",
     "changelog": "conventional-changelog -p angular -i CHANGELOG.md -s -r 0",
     "lint": "esw *.js src --color",
@@ -59,6 +60,7 @@
     "should": "11.2.1",
     "supertest": "3.0.0",
     "supertest-as-promised": "4.0.2",
+    "underscore": "1.8.3",
     "validate-commit-msg": "2.12.1"
   },
   "dependencies": {
