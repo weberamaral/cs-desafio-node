@@ -1,5 +1,5 @@
-<a name="0.1.0"></a>
-# [0.1.0](https://github.com/weberamaral/cs-desafio-node/compare/1700c0a...v0.1.0) (2017-05-03)
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/weberamaral/cs-desafio-node/compare/1700c0a...v0.2.0) (2017-05-04)
 
 
 ### Bug Fixes
