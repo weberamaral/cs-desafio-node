@@ -4,7 +4,7 @@
  */
 module.exports = {
   errors: {
-    unAuthorized: 'Não autorizado.',
+    unAuthorized: 'Não autorizado',
     apiNotFound: 'Recurso não encontrado.',
     badRequest: 'Erro de validação',
     sessionTimeout: 'Sessão inválida',
