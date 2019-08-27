@@ -1,5 +1,7 @@
 # Concrete Solutions - Desafio Node.js
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/weberamaral/cs-desafio-node.svg)](https://greenkeeper.io/)
+
 ## Overview
 API REST in Node.js usando ES6 and Express com Code Coverage e autenticação JWT
 
